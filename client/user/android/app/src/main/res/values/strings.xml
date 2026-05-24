@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">GoGoal</string>
+    <string name="title_activity_main">GoGoal</string>
+    <string name="package_name">com.gogoal.app</string>
+    <string name="custom_url_scheme">com.gogoal.app</string>
+</resources>
