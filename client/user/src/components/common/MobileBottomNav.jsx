@@ -23,8 +23,8 @@ const MobileBottomNav = () => {
   const iconClass = "drop-shadow-[0_0_8px_#9DFF00]";
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[999] md:hidden bg-black/95 border-t border-[#9DFF00] shadow-[0_0_20px_#9DFF00] pb-2">
-      <div className="grid grid-cols-4 text-center">
+    <div className="fixed bottom-0 left-0 right-0 z-[999] md:hidden bg-black/95 border-t border-[#9DFF00] pb-2">
+      <div className="grid grid-cols-4 text-center drop-shadow-[0_0_8px_#9DFF00]">
 
         <NavLink to="/auth/profile" className={itemClass}>
           <User size={22} className={iconClass} />

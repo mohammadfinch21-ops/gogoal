@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
@@ -42,52 +42,61 @@ const Navbar = () => {
     toast.success("👋 تم تسجيل الخروج");
     window.location.href = "/";
   };
-
+  
   const menuItemClass =
     "block rounded-2xl px-5 py-4 bg-white/10 border border-white/10 text-white hover:bg-[#9DFF00] hover:text-black transition-all duration-300 font-bold";
-
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="navbar bg-black px-2 md:px-6 text-white fixed top-0 z-50 shadow-md animate-slide-in-top">
       <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
+        <div className="relative">
+  <button
+    type="button"
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+    className="btn btn-ghost lg:hidden"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-7 w-7"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M4 6h16M4 12h8m-8 6h16"
+      />
+    </svg>
+  </button>
 
-          <ul
-            tabIndex={0}
-            className="dropdown-content mt-4 z-[999] p-4 shadow-2xl bg-[#111827]/95 backdrop-blur-md border border-[#9DFF00] rounded-3xl w-60 text-right"
+  {isMenuOpen && (
+    <ul className="absolute top-14 right-0 z-[999] p-4 shadow-2xl bg-[#111827]/95 backdrop-blur-md border border-[#9DFF00] rounded-3xl w-60 text-right">
+      <li className="list-none">
+        {isLoggedIn ? (
+          <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              handleLogout();
+            }}
+            className={`${menuItemClass} w-full text-right`}
           >
-
-            <li className="list-none">
-              {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className={`${menuItemClass} w-full text-right`}
-                >
-                  تسجيل الخروج
-                </button>
-              ) : (
-                <Link to="/login" className={menuItemClass}>
-                  تسجيل الدخول
-                </Link>
-              )}
-            </li>
-          </ul>
-        </div>
+            تسجيل الخروج
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            onClick={() => setIsMenuOpen(false)}
+            className={menuItemClass}
+          >
+            تسجيل الدخول
+          </Link>
+        )}
+      </li>
+    </ul>
+  )}
+</div>
 
         <Link to="/" className="flex items-center gap-1 md:gap-2 min-w-fit">
           <img
