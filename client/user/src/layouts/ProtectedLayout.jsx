@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { useSelector } from "react-redux";
+import MobileBottomNav from "../components/common/MobileBottomNav";
 
 export default function ProtectedLayout() {
 
@@ -13,12 +14,14 @@ export default function ProtectedLayout() {
 }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
+  <div className="flex flex-col min-h-screen">
+    <Navbar />
 
-      <main className="flex-grow pt-16">
-        <Outlet />
-      </main>
-    </div>
-  );
+<main className="flex-grow pt-16 pb-24">
+  <Outlet />
+</main>
+
+<MobileBottomNav />
+  </div>
+);
 }

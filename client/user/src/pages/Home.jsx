@@ -374,7 +374,7 @@ const TicketCard = ({ match, icon }) => (
       block: "center",
     });
   }}
-  className="btn w-full bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black text-lg font-bold rounded-2xl h-14 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_#9DFF00]"
+   className="mt-4 btn w-full bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black text-xl font-bold rounded-2xl h-16 transition-all duration-300 hover:scale-105 shadow-[0_0_25px_#9DFF00]"
 >
   احجز الآن
 </button>
