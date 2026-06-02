@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
 
-    <footer className="bg-base-200 py-8 text-center mt-10">
+    <footer className="bg-base-200 py-8 text-center mt-10 pb-24 md:pb-8">
 
       <div className="flex flex-col items-center gap-4">
 
