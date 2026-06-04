@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
 
-    <footer className="bg-base-200 py-8 text-center mt-10 pb-24 md:pb-8">
+    <footer className="bg-base-200 py-8 text-center mt-10 mb-24 md:mb-0">
 
       <div className="flex flex-col items-center gap-4">
 
@@ -60,7 +60,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://facebook.com/"
+            href="https://www.facebook.com/profile.php?id=61553149197003"
             target="_blank"
             rel="noopener noreferrer"
           >
