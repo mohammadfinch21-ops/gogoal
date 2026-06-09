@@ -56,7 +56,7 @@ const TurfCard = ({ turf }) => {
       to={isLoggedIn ? `/auth/turf/${turf._id}` : `/turf/${turf._id}`}
       className="btn bg-green-500 hover:bg-green-600 text-white border-none"
     >
-      احجز الآن
+  احجز مكانك
     </Link>
 
   </div>
