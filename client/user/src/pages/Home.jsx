@@ -445,26 +445,28 @@ const TicketCard = ({ match, icon }) => (
     : "⏳ بانتظار الدفع"}
 </p>
            
-       {localStorage.getItem("isLoggedIn") &&
- ticket.ownerId &&
- userData.id === ticket.ownerId && (
+      {localStorage.getItem("isLoggedIn") &&
+ ticket.phone &&
+ userData.phone === ticket.phone && (
 
-  <button
+<button
+  disabled={ticket.status === "paid"}
   onClick={async () => {
+    if (ticket.status === "paid") return;
+
     console.log("ticket id:", ticket.id);
 
-    await deleteDoc(
-      doc(db, "tickets", ticket.id)
-    );
+    await deleteDoc(doc(db, "tickets", ticket.id));
 
-    setTickets(
-      tickets.filter((t) => t.id !== ticket.id)
-    );
+    setTickets(tickets.filter((t) => t.id !== ticket.id));
   }}
-  className="mt-4 inline-flex items-center justify-center bg-[#f80303] hover:bg-[#f80606] text-black font-bold rounded-2xl px-2 py-2 transition-all duration-300 shadow-[0_0_25px_#9DFF00]"
+  className={`mt-4 inline-flex items-center justify-center font-bold rounded-2xl px-2 py-2 transition-all duration-300 ${
+    ticket.status === "paid"
+      ? "hidden"
+      : "bg-[#f80303] hover:bg-[#f80606] text-black shadow-[0_0_25px_#9DFF00]"
+  }`}
 >
-  
-  إلغاء التذكرة
+  إلغاء الحجز
 </button>
 
 )}
