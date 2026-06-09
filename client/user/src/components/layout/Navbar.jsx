@@ -148,7 +148,7 @@ const Navbar = () => {
           href="#ticketCards"
           className="btn bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black font-bold rounded-2xl px-3 md:px-6 py-3 transition-all duration-300 hover:scale-105 shadow-[0_0_15px_#9DFF00]"
         >
-          احجز الآن
+         احجز مكانك
         </a>
       </div>
     </div>

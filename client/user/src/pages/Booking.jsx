@@ -15,7 +15,7 @@ export default function Booking() {
   const navigate = useNavigate();
 
   const [ticketType, setTicketType] = useState("لاعب");
-
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 const match = location.state?.match || "Tuesday";
 
 const price = ticketType === "لاعب" ? 5 : 3;
@@ -77,11 +77,14 @@ const tickets = ticketsSnapshot.docs.map((doc) => ({
   ...doc.data(),
 }));
 
+console.log("user", user);
+console.log("user.id", user.id);
+
     const alreadyBooked = tickets.some(
-      (ticket) =>
-        ticket.ownerId === user.id &&
-        ticket.match === match
-    );
+  (ticket) =>
+    ticket.phone === user.phone &&
+    ticket.match === match
+);
 
     if (alreadyBooked) {
       toast.error("لديك تذكرة محجوزة مسبقًا لهذه المباراة 🎟️");
@@ -89,29 +92,68 @@ const tickets = ticketsSnapshot.docs.map((doc) => ({
     }
 
     const newTicket = {
-      type: ticketType,
-      price,
-      match,
-      name: user.name,
-      phone: user.phone,
-      age: user.age,
-      position: user.position,
-      ownerId: user.id,
-      bookedAt: new Date().toLocaleString(),
-    };
+  type: ticketType,
+  price,
+  match,
+  name: user.name,
+  phone: user.phone,
+  age: user.age,
+  position: user.position,
+  ownerId: user.phone,
+  status: "pending",
+  bookedAt: new Date().toLocaleString(),
+};
 
     await addDoc(collection(db, "tickets"), newTicket);
-    toast.success("تم حجز تذكرتك بنجاح ⚽🎟️");
-    navigate("/");
+    toast.success("تم استلام طلب الحجز بنجاح ⚽🎟️");
+setShowPaymentModal(true);
   }}
   className="btn bg-black text-white border-none hover:bg-gray-800 w-full"
 >
-  تأكيد الدفع
+  إرسال طلب الحجز
 </button>
-      </div>
+            </div>
+
+      {showPaymentModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-black border border-green-500 rounded-3xl p-8 max-w-md w-full text-center">
+
+            <h2 className="text-3xl font-bold text-green-400 mb-4">
+              ⚽ تم استلام طلب الحجز
+            </h2>
+
+            <p className="text-white mb-3">
+              لإكمال الحجز يرجى تحويل قيمة التذكرة
+            </p>
+
+            <p className="text-2xl font-bold text-green-400 mb-4">
+              {price} JD
+            </p>
+
+            <p className="text-white mb-2">
+              📱 CliQ: 0788246916
+            </p>
+
+            <p className="text-gray-400 mb-6">
+              بعد التحويل أرسل صورة التحويل للإدارة
+            </p>
+
+            <button
+              onClick={() => {
+                setShowPaymentModal(false);
+                navigate("/");
+              }}
+              className="btn bg-green-500 text-white border-none hover:bg-green-600"
+            >
+              فهمت
+            </button>
+
+          </div>
+        </div>
+      )}
 
     </div>
-    
+
   );
   
 }

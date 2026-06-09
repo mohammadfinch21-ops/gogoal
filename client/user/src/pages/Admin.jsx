@@ -117,7 +117,34 @@ const updatePlayerStat = async (player, field, amount) => {
             <p>⚽ المباراة: {ticket.match === "Tuesday" ? "الثلاثاء" : "الجمعة"}</p>
             <p>📍 المركز: {ticket.position}</p>
             <p>💰 السعر: {ticket.price} JD</p>
+            <p>
+  💳 الحالة:
+  {ticket.status === "paid"
+    ? " ✅ مدفوع"
+    : " ⏳ بانتظار الدفع"}
+</p>
             <p>🕒 التاريخ: {ticket.bookedAt}</p>
+
+            {ticket.status !== "paid" && (
+  <button
+    onClick={async () => {
+      await updateDoc(doc(db, "tickets", ticket.id), {
+        status: "paid",
+      });
+
+      setTickets(
+        tickets.map((t) =>
+          t.id === ticket.id
+            ? { ...t, status: "paid" }
+            : t
+        )
+      );
+    }}
+    className="btn bg-green-500 text-white border-none hover:bg-green-600 mt-4 mr-2"
+  >
+    ✅ تأكيد الدفع
+  </button>
+)}
             <button
               onClick={async () => {
                 await deleteDoc(doc(db, "tickets", ticket.id));

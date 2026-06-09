@@ -134,7 +134,7 @@ const TicketCard = ({ match, icon }) => (
       state={{ match }}
       className="mt-4 flex items-center justify-center w-full bg-[#9DFF00] hover:bg-[#7CFF00] text-black text-xl font-bold rounded-2xl py-4 transition-all duration-300 shadow-[0_0_25px_#9DFF00]"
     >
-      احجز تذكرتك
+      احجز مكانك
     </Link>
 
   </div>
@@ -204,7 +204,7 @@ const TicketCard = ({ match, icon }) => (
   }}
   className="mt-4 btn w-full bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black text-xl font-bold rounded-2xl h-16 transition-all duration-300 hover:scale-105 shadow-[0_0_25px_#9DFF00]"
 >
-  احجز تذكرتك
+ احجز مكانك
 </button>
 
           </div>
@@ -293,7 +293,7 @@ const TicketCard = ({ match, icon }) => (
   }}
   className="mt-4 btn w-full bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black text-xl font-bold rounded-2xl h-16 transition-all duration-300 hover:scale-105 shadow-[0_0_25px_#9DFF00]"
 >
-  احجز الآن
+ احجز مكانك
 </button>
   ) : (
   <button className="btn bg-gray-600 border-none text-white mt-4" disabled>
@@ -376,7 +376,7 @@ const TicketCard = ({ match, icon }) => (
   }}
    className="mt-4 btn w-full bg-[#9DFF00] hover:bg-[#7CFF00] border-none text-black text-xl font-bold rounded-2xl h-16 transition-all duration-300 hover:scale-105 shadow-[0_0_25px_#9DFF00]"
 >
-  احجز الآن
+احجز مكانك
 </button>
 ) : (
   <button className="btn bg-gray-600 border-none text-white mt-4" disabled>
@@ -394,7 +394,7 @@ const TicketCard = ({ match, icon }) => (
 <div className="text-center mb-12">
 
   <h2 className="text-4xl font-bold mb-10 text-green-500">
-    التذاكر المحجوزة 🎟️
+    بطاقات الحجز ⚽
     
   </h2>
 
@@ -433,9 +433,17 @@ const TicketCard = ({ match, icon }) => (
               🎂 العمر: {ticket.age}
             </p>
 
-            <p className="text-green-400 text-sm mt-4">
-              ✅ تم تأكيد الحجز
-            </p>
+           <p
+  className={`text-sm mt-4 ${
+    ticket.status === "paid"
+      ? "text-green-400"
+      : "text-yellow-400"
+  }`}
+>
+  {ticket.status === "paid"
+    ? "✅ تم تأكيد الدفع"
+    : "⏳ بانتظار الدفع"}
+</p>
            
        {localStorage.getItem("isLoggedIn") &&
  ticket.ownerId &&
